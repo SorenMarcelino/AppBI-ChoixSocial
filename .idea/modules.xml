@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ChoixSocial.iml" filepath="$PROJECT_DIR$/.idea/ChoixSocial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AppBI-ChoixSocial.iml" filepath="$PROJECT_DIR$/.idea/AppBI-ChoixSocial.iml" />
     </modules>
   </component>
 </project>
