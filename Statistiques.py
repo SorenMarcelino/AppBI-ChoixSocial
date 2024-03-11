@@ -11,9 +11,13 @@ def is_classement_uniq(data):
     codex = []
     occurence = []
     for column in data.columns[0:]:
-        classement = ""
+        classement = []
         for val in data[column]:
-            classement += val
+            if isinstance(val, int):
+                classement.append(str(val))
+            else:
+                classement.append(val)
+
         if classement not in codex:
             codex.append(classement)
             occurence.append(1)
@@ -54,7 +58,7 @@ def plot_frequency(data):
         position.append(pos)
         pos += 1
 
-    print(position)
+    print(data.keys(), data.values())
 
     for x, y in data.items():
         print(x,y)

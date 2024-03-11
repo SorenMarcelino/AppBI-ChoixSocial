@@ -1,7 +1,7 @@
 import pandas as pd
 from Statistiques import *
 
-data_vote = pd.read_csv(filepath_or_buffer='data/exo1.csv', delimiter=',', header=None)
+data_vote = pd.read_csv(filepath_or_buffer='data/profil2.csv', delimiter=',', header=None)
 
 # Get size of dataset
 print(data_vote)
