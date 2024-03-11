@@ -64,6 +64,9 @@ def plot_frequency(data):
         print(x,y)
         plt.plot(position, y, label=x)
 
+    plt.xlabel("Position")
+    plt.ylabel("Fréquence d'apparition")
+    plt.title("Fréquence de vote pour chaques candidats en fonction de leur position")
     plt.legend()
     plt.show()
 
@@ -71,5 +74,8 @@ def plot_frequency(data):
     for x, y in data.items():
         ax.bar(position, y, width=1, edgecolor="white", linewidth=0.7)
         plt.legend = x
+        plt.xlabel("Position")
+        plt.ylabel("Fréquence d'apparition")
+        plt.title("Fréquence de vote pour chaques candidat: " + x)
         plt.show()
         fig, ax = plt.subplots()
