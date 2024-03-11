@@ -1,3 +1,4 @@
+from voteUnTour import *
 import pandas as pd
 from Statistiques import *
 
@@ -15,3 +16,5 @@ print(uniq_ranks)
 frq_val = frequency_per_ranks_per_crit(data_vote)
 
 plot_frequency(frq_val)
+
+voteUnTour(data_vote)
