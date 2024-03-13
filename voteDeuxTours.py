@@ -1,0 +1,51 @@
+import matplotlib.pyplot as plt
+
+
+def voteDeuxTours(csv):
+    # TODO: Deux gagnats du premier tour
+    premiere_ligne = csv.iloc[0]
+    occurrences = premiere_ligne.value_counts()
+    # print(occurrences)
+
+    deux_plus_frequents = occurrences.nlargest(2)
+
+    # Afficher le gagnant
+    print(f"Les gagnants du premier tour sont :\n"
+          f" {deux_plus_frequents.index[0]} avec {occurrences[deux_plus_frequents.index[0]]} votes\n"
+          f" {deux_plus_frequents.index[1]} avec {occurrences[deux_plus_frequents.index[1]]} votes")
+
+    # TODO: Gagnant du second tour
+    valeur_a_supprimer1 = deux_plus_frequents.index[0]
+    valeur_a_supprimer2 = deux_plus_frequents.index[1]
+    csv = csv.drop(columns=csv.columns[csv.iloc[0] == valeur_a_supprimer1])
+    csv = csv.drop(columns=csv.columns[csv.iloc[0] == valeur_a_supprimer2])
+
+    while True:
+        if (valeur_a_supprimer1 in csv.iloc[0].values) or (valeur_a_supprimer2 in csv.iloc[0].values):
+            if not csv.empty:
+                premiere_ligne = csv.iloc[0]
+                occurrences[deux_plus_frequents.index[0]] += (premiere_ligne == deux_plus_frequents.index[0]).sum()
+                occurrences[deux_plus_frequents.index[1]] += (premiere_ligne == deux_plus_frequents.index[1]).sum()
+                # print(csv)
+            else:
+                # print("CSV vide, sortie de la boucle.")
+                break
+
+            if valeur_a_supprimer1 in csv.iloc[0].values:
+                csv = csv.drop(columns=csv.columns[csv.iloc[0] == valeur_a_supprimer1])
+            if valeur_a_supprimer2 in csv.iloc[0].values:
+                csv = csv.drop(columns=csv.columns[csv.iloc[0] == valeur_a_supprimer2])
+        else:
+            csv = csv.iloc[1:, :]
+            if csv.empty:
+                # print("CSV vide, sortie de la boucle.")
+                break
+
+    if occurrences[deux_plus_frequents.index[0]] > occurrences[deux_plus_frequents.index[1]]:
+        print(f"Le gagnant du second tour est :\n"
+              f" {deux_plus_frequents.index[0]} avec {occurrences[deux_plus_frequents.index[0]]} votes")
+    else:
+        print(f"Le gagnant du second tour est :\n"
+              f" {deux_plus_frequents.index[1]} avec {occurrences[deux_plus_frequents.index[1]]} votes")
+
+# TODO: Supprimer les colonnes directement après le résultat du tour 1
