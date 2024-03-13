@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 
 def voteDeuxTours(csv):
-    # TODO: Deux gagnats du premier tour
+    # Deux gagnants du premier tour
     premiere_ligne = csv.iloc[0]
     occurrences = premiere_ligne.value_counts()
     # print(occurrences)
@@ -14,7 +14,7 @@ def voteDeuxTours(csv):
           f" {deux_plus_frequents.index[0]} avec {occurrences[deux_plus_frequents.index[0]]} votes\n"
           f" {deux_plus_frequents.index[1]} avec {occurrences[deux_plus_frequents.index[1]]} votes")
 
-    # TODO: Gagnant du second tour
+    # Gagnant du second tour
     valeur_a_supprimer1 = deux_plus_frequents.index[0]
     valeur_a_supprimer2 = deux_plus_frequents.index[1]
     csv = csv.drop(columns=csv.columns[csv.iloc[0] == valeur_a_supprimer1])
@@ -47,5 +47,3 @@ def voteDeuxTours(csv):
     else:
         print(f"Le gagnant du second tour est :\n"
               f" {deux_plus_frequents.index[1]} avec {occurrences[deux_plus_frequents.index[1]]} votes")
-
-# TODO: Supprimer les colonnes directement après le résultat du tour 1
