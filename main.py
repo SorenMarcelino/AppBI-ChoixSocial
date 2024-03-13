@@ -1,9 +1,10 @@
 from voteUnTour import *
+from voteDeuxTours import *
 from borda import *
 import pandas as pd
 from Statistiques import *
 
-data_vote = pd.read_csv(filepath_or_buffer='data/profil3.csv    ', delimiter=',', header=None)
+data_vote = pd.read_csv(filepath_or_buffer='data/profil3.csv', delimiter=',', header=None)
 
 '''
 STAT
@@ -27,15 +28,15 @@ Fin STAT
 '''
 
 '''
-Vote à X tour(s)
+Vote à 1 tour
 '''
 
 voteUnTour(data_vote)
 
 '''
-Vote à X tour(s)
+Vote à 2 tour
 '''
-
+voteDeuxTours(data_vote)
 
 '''
 Borda
