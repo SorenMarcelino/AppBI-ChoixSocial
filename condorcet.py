@@ -43,6 +43,9 @@ def condorcet(csv):
                 score = scores.get((candidat1, candidat2), 0)
                 df.loc[candidat1, candidat2] = score
 
+    # Inférer les types d'objets
+    df = df.infer_objects()
+
     # Remplacer les valeurs NaN par 0
     df.fillna(0, inplace=True)
 
@@ -93,11 +96,21 @@ def condorcet(csv):
         if candidate_score == len(candidates) - 1:
             winners.add(candidate)
 
-    if len(winners) ==1:
+    if len(winners) == 1:
         print("Le gagnant de Condorcet est :", winners.pop())
     elif len(winners) > 1:
         print("Il y a une égalité entre les candidats suivants pour le gagnant de Condorcet :", winners)
     else:
         print("Aucun gagant de Condorcet trouvé.")
 
+    # Trier les candidats par ordre alphabétique
+    sorted_candidates = sorted(candidates)
 
+    # Affichage du plot bar des résultats de Condorcet pour tous les candidats
+    plt.figure(figsize=(10, 6))
+    plt.bar(range(len(sorted_candidates)), [list(results.values()).count(c) for c in sorted_candidates], align='center')
+    plt.xticks(range(len(sorted_candidates)), sorted_candidates)
+    plt.xlabel('Candidats')
+    plt.ylabel('Nombre de victoires de Condorcet')
+    plt.title('Résultats de Condorcet pour tous les candidats')
+    plt.savefig('fig_condorcet/resultsCondorcet.png')

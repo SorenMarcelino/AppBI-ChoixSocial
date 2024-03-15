@@ -5,7 +5,7 @@ from condorcet import *
 import pandas as pd
 from Statistiques import *
 
-data_vote = pd.read_csv(filepath_or_buffer='data/profil1.csv', delimiter=',', header=None)
+data_vote = pd.read_csv(filepath_or_buffer='data/exo3.csv', delimiter=',', header=None)
 '''
 STAT
 '''
