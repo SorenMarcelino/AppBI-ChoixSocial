@@ -1,3 +1,4 @@
+from format_soc_to_csv import *
 from voteUnTour import *
 from voteDeuxTours import *
 from borda import *
@@ -5,7 +6,9 @@ from condorcet import *
 import pandas as pd
 from Statistiques import *
 
-data_vote = pd.read_csv(filepath_or_buffer='data/exo3.csv', delimiter=',', header=None)
+data_vote = pd.read_csv(filepath_or_buffer='data_web/2019.csv', delimiter=',', header=None)
+format_soc_to_csv()
+
 '''
 STAT
 '''
@@ -30,7 +33,7 @@ Fin STAT
 '''
 Vote à 1 tour
 '''
-#voteUnTour(data_vote)
+voteUnTour(data_vote)
 '''
 Fin Vote à 1 tour
 '''
