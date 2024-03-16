@@ -2,6 +2,7 @@ from voteUnTour import *
 from voteDeuxTours import *
 from borda import *
 from condorcet import *
+from alternative import *
 import pandas as pd
 from Statistiques import *
 
@@ -30,7 +31,9 @@ Fin STAT
 '''
 Vote à 1 tour
 '''
+
 #voteUnTour(data_vote)
+
 '''
 Fin Vote à 1 tour
 '''
@@ -52,9 +55,20 @@ Borda
 Fin Borda
 '''
 
+
+'''
+Alternatif
+'''
+print(vote_alternatif(data_vote, dim[1]))
+print(vote_alternatif_classement(data_vote))
+'''
+Fin Alternatif
+'''
+
 # -------------------
 # Condorcet
 # -------------------
 condorcet(data_vote)
+
 
 
