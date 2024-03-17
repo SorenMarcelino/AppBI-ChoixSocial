@@ -4,7 +4,6 @@ from borda import *
 from condorcet import *
 from alternative import *
 from copeland import *
-from coombs import *
 import pandas as pd
 from Statistiques import *
 
