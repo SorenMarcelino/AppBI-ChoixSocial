@@ -3,17 +3,19 @@ from voteDeuxTours import *
 from borda import *
 from condorcet import *
 from alternative import *
+from copeland import *
+from coombs import *
 import pandas as pd
 from Statistiques import *
 
-data_vote = pd.read_csv(filepath_or_buffer='data/exo3.csv', delimiter=',', header=None)
+data_vote = pd.read_csv(filepath_or_buffer='data/exo2.csv', delimiter=',', header=None)
 '''
 STAT
 '''
 
 # Get size of dataset
 #print(data_vote)
-#dim = size_of_dataset(data_vote)
+dim = size_of_dataset(data_vote)
 #print(dim)
 #print("Le dataset contient " + str(dim[1]) + " classement(s) de " + str(dim[0]) + " critères")
 
@@ -59,16 +61,21 @@ Fin Borda
 '''
 Alternatif
 '''
-print(vote_alternatif(data_vote, dim[1]))
-print(vote_alternatif_classement(data_vote))
+#print(vote_alternatif(data_vote, dim[1]))
+#print(vote_alternatif_classement(data_vote))
 '''
 Fin Alternatif
 '''
+
 
 # -------------------
 # Condorcet
 # -------------------
 condorcet(data_vote)
 
+# -------------------
+# Copeland
+# -------------------
+copeland(data_vote)
 
 
