@@ -1,5 +1,6 @@
 import itertools
 
+
 def kemeny_young(csv):
     nombre_de_colonnes = len(csv.columns)
     nombre_de_lignes = len(csv.index)
@@ -16,8 +17,8 @@ def kemeny_young(csv):
         score = 0
         for vote in votants:
             for i in range(len(vote)):
-                for j in range(i+1, len(vote)):
-                    if (perm.index(vote[i]) < perm.index(vote[j])):
+                for j in range(i + 1, len(vote)):
+                    if perm.index(vote[i]) < perm.index(vote[j]):
                         score += 1
         scores[perm] = score
 
