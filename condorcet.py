@@ -57,18 +57,20 @@ def condorcet(csv):
     #print(df)
 
     # Affichage du plot avec les valeurs des scores dans les cases
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=(10, 8))  # Ajustement de la taille de la figure
     plt.imshow(df, cmap='coolwarm', interpolation='nearest')
     plt.colorbar(label='Score')
     plt.xticks(range(len(df.columns)), df.columns, rotation=45)
     plt.yticks(range(len(df.index)), df.index)
     for i in range(len(df.index)):
         for j in range(len(df.columns)):
-            plt.text(j, i, df.iloc[i, j], ha='center', va='center', color='black')
+            # Arrondir les valeurs à deux chiffres après la virgule
+            plt.text(j, i, '{:.2f}'.format(df.iloc[i, j]), ha='center', va='center', color='black')
     plt.title("Matrice des scores de Condorcet")
     plt.xlabel("Candidats")
     plt.ylabel("Candidats")
-    plt.savefig('fig_condorcet/matriceCondorcet.png')
+    plt.tight_layout()  # Ajustement automatique de l'espacement
+    plt.savefig('fig_condorcet/matriceCondorcet.png', dpi=300)  # Augmentation de la résolution
 
     """
         Analyses the dictionary of scores and
@@ -103,13 +105,10 @@ def condorcet(csv):
     else:
         print("Aucun gagant de Condorcet trouvé.")
 
-    # Trier les candidats par ordre alphabétique
-    sorted_candidates = sorted(candidates)
-
     # Affichage du plot bar des résultats de Condorcet pour tous les candidats
     plt.figure(figsize=(10, 6))
-    plt.bar(range(len(sorted_candidates)), [list(results.values()).count(c) for c in sorted_candidates], align='center')
-    plt.xticks(range(len(sorted_candidates)), sorted_candidates)
+    plt.bar(range(len(candidates)), [list(results.values()).count(c) for c in candidates], align='center')
+    plt.xticks(range(len(candidates)), candidates)
     plt.xlabel('Candidats')
     plt.ylabel('Nombre de victoires de Condorcet')
     plt.title('Résultats de Condorcet pour tous les candidats')

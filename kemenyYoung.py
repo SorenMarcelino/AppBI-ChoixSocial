@@ -44,7 +44,7 @@ def plot_results(gagnants, scores):
     plt.xlabel('Score')
     plt.title('Résultats des candidats')
     plt.grid(axis='x', linestyle='--', alpha=0.7)
-    plt.show()
+    #plt.show()
 
     # Matrice d'incidence pour visualiser les scores de chaque paire de candidats
     matrice_incidence = np.zeros((len(candidats), len(candidats)))
@@ -60,4 +60,4 @@ def plot_results(gagnants, scores):
     plt.title('Matrice d\'incidence')
     plt.xticks(np.arange(len(candidats)), candidats, rotation=45)
     plt.yticks(np.arange(len(candidats)), candidats)
-    plt.show()
+    #plt.show()
