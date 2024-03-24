@@ -3,6 +3,8 @@ from voteDeuxTours import *
 from borda import *
 from condorcet import *
 from alternative import *
+from coombs import *
+from kemenyYoung import *
 from copeland import *
 import pandas as pd
 from Statistiques import *
@@ -68,9 +70,21 @@ Fin Alternatif
 
 
 # -------------------
+# Coombs
+# -------------------
+#print(vote_alternatif_coombs(data_vote, dim[1]))
+#print(vote_alternatif_classement_coombs(data_vote))
+
+# -------------------
 # Condorcet
 # -------------------
-condorcet(data_vote)
+#condorcet(data_vote)
+
+
+# -------------------
+# Kemeny-Young
+# -------------------
+print(kemeny_young(data_vote))
 
 # -------------------
 # Copeland
