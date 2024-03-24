@@ -1,3 +1,4 @@
+from format_soc_to_csv import *
 from voteUnTour import *
 from voteDeuxTours import *
 from borda import *
@@ -10,13 +11,16 @@ import pandas as pd
 from Statistiques import *
 
 data_vote = pd.read_csv(filepath_or_buffer='data/exo2.csv', delimiter=',', header=None)
+data_vote = pd.read_csv(filepath_or_buffer='data_web/2019.csv', delimiter=',', header=None)
+format_soc_to_csv()
+
 '''
 STAT
 '''
 
 # Get size of dataset
 #print(data_vote)
-dim = size_of_dataset(data_vote)
+#dim = size_of_dataset(data_vote)
 #print(dim)
 #print("Le dataset contient " + str(dim[1]) + " classement(s) de " + str(dim[0]) + " critères")
 
@@ -34,9 +38,7 @@ Fin STAT
 '''
 Vote à 1 tour
 '''
-
-#voteUnTour(data_vote)
-
+voteUnTour(data_vote)
 '''
 Fin Vote à 1 tour
 '''
