@@ -1,3 +1,8 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
 def methodeBorda(data):
     result = init_dict(data)
     for x, y in data.items():
@@ -5,7 +10,7 @@ def methodeBorda(data):
         for z in y:
             result[x] += point * z
             point -= 1
-    print(result)
+    #print(result)
 
     return result
 
@@ -32,3 +37,17 @@ def init_dict(data):
     for x in data.keys():
         result[x] = 0
     return result
+
+
+def plot_borda(data):
+    # Barplot
+    plt.figure(figsize=(10, 6))
+    for candidat, scores in data.items():
+        plt.plot(range(1, len(scores) + 1), scores, label=candidat, marker='o')
+    plt.xlabel('Position dans le classement')
+    plt.ylabel('Nombre de votes')
+    plt.title('Classement Borda')
+    plt.legend()
+    plt.xticks(np.arange(1, len(scores) + 1))
+    plt.grid(True)
+    plt.savefig('fig_borda/borda.png')
