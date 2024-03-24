@@ -5,10 +5,11 @@ from condorcet import *
 from alternative import *
 from coombs import *
 from kemenyYoung import *
+from copeland import *
 import pandas as pd
 from Statistiques import *
 
-data_vote = pd.read_csv(filepath_or_buffer='data/exo3.csv', delimiter=',', header=None)
+data_vote = pd.read_csv(filepath_or_buffer='data/exo2.csv', delimiter=',', header=None)
 '''
 STAT
 '''
@@ -67,6 +68,7 @@ Alternatif
 Fin Alternatif
 '''
 
+
 # -------------------
 # Coombs
 # -------------------
@@ -84,5 +86,9 @@ Fin Alternatif
 # -------------------
 print(kemeny_young(data_vote))
 
+# -------------------
+# Copeland
+# -------------------
+copeland(data_vote)
 
 
