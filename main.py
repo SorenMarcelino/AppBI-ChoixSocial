@@ -26,7 +26,7 @@ STAT
 #uniq_ranks = is_classement_uniq(data_vote)
 #print(uniq_ranks)
 
-#frq_val = frequency_per_ranks_per_crit(data_vote)
+frq_val = frequency_per_ranks_per_crit(data_vote)
 
 #plot_frequency(frq_val)
 
@@ -53,8 +53,8 @@ Fin Vote à 2 tours
 '''
 Borda
 '''
-#classementBorda(methodeBorda(frq_val))
-#print(vainqueurBorda(methodeBorda(frq_val)))
+classementBorda(methodeBorda(frq_val))
+print(vainqueurBorda(methodeBorda(frq_val)))
 '''
 Fin Borda
 '''
