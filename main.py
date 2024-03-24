@@ -3,6 +3,8 @@ from voteDeuxTours import *
 from borda import *
 from condorcet import *
 from alternative import *
+from coombs import *
+from kemenyYoung import *
 import pandas as pd
 from Statistiques import *
 
@@ -13,7 +15,7 @@ STAT
 
 # Get size of dataset
 #print(data_vote)
-#dim = size_of_dataset(data_vote)
+dim = size_of_dataset(data_vote)
 #print(dim)
 #print("Le dataset contient " + str(dim[1]) + " classement(s) de " + str(dim[0]) + " critères")
 
@@ -59,16 +61,28 @@ Fin Borda
 '''
 Alternatif
 '''
-print(vote_alternatif(data_vote, dim[1]))
-print(vote_alternatif_classement(data_vote))
+#print(vote_alternatif(data_vote, dim[1]))
+#print(vote_alternatif_classement(data_vote))
 '''
 Fin Alternatif
 '''
 
 # -------------------
+# Coombs
+# -------------------
+#print(vote_alternatif_coombs(data_vote, dim[1]))
+#print(vote_alternatif_classement_coombs(data_vote))
+
+# -------------------
 # Condorcet
 # -------------------
-condorcet(data_vote)
+#condorcet(data_vote)
+
+
+# -------------------
+# Kemeny-Young
+# -------------------
+print(kemeny_young(data_vote))
 
 
 
