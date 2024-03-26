@@ -41,7 +41,7 @@ def vote_alternatif_coombs(data_frame, cols):
         loosers.append(loosing_key)
 
 
-def vote_alternatif_classement_coombs(data_frame):
+def vote_alternatif_classement_coombs(data_frame, title):
     clone = data_frame.copy()
     participants = {}
     participantsWinner = {}
@@ -80,7 +80,7 @@ def vote_alternatif_classement_coombs(data_frame):
         del participantsWinner[loosing_key]
         loosers.append(loosing_key)
 
-    coombs_plot(tours, toursWinner)
+    coombs_plot(tours, toursWinner, title)
 
     loosers.reverse()
     return loosers
@@ -91,7 +91,7 @@ def find_non_loser(y, loosers):
             return item
     return None
 
-def coombs_plot(data, dataWinner):
+def coombs_plot(data, dataWinner, title):
     participants = set(participant for tour in data.values() for participant in tour.keys())
     tours = sorted(data.keys())
     pourcentages = {participant: [] for participant in participants}
@@ -148,7 +148,7 @@ def coombs_plot(data, dataWinner):
     plt.xticks(x, tours)
     plt.legend()
     plt.grid(True)
-    plt.savefig('fig_coombs/coombs_dernier.png')
+    plt.savefig(f'fig_coombs/coombsDernier_{title}.png')
 
     # Création de l'histogramme empilé
     plt.figure(figsize=(10, 6))
@@ -169,4 +169,4 @@ def coombs_plot(data, dataWinner):
     plt.xticks(x, tours)
     plt.legend()
     plt.grid(True)
-    plt.savefig('fig_coombs/coombs_premier.png')
+    plt.savefig(f'fig_coombs/coombsPremier_{title}.png')

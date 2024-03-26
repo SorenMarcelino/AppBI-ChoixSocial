@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def voteUnTour(csv):
+def voteUnTour(csv, title):
     premiere_ligne = csv.iloc[0]
     occurrences = premiere_ligne.value_counts()
     # print(occurrences)
@@ -19,6 +19,6 @@ def voteUnTour(csv):
     plt.title('Nombre de voix pour chaque candidat')
 
     # Afficher le diagramme
-    plt.savefig('fig_voteUnTour/voteUnTour.png')
+    plt.savefig(f'fig_voteUnTour/voteUnTour_{title}.png')
     plt.close()
 

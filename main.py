@@ -1,3 +1,6 @@
+import os
+import sys
+
 from format_soc_to_csv import *
 from voteUnTour import *
 from voteDeuxTours import *
@@ -10,97 +13,110 @@ from copeland import *
 import pandas as pd
 from Statistiques import *
 
-data_vote = pd.read_csv(filepath_or_buffer='data/profil2.csv', delimiter=',', header=None)
-#data_vote = pd.read_csv(filepath_or_buffer='data_web/2019.csv', delimiter=',', header=None)
+#data_vote = pd.read_csv(filepath_or_buffer='data_web_season/2019.csv', delimiter=',', header=None)
+#data_vote = pd.read_csv(filepath_or_buffer='data_web_season/2019.csv', delimiter=',', header=None)
 
-format_soc_to_csv()
+data_vote = None
+dossier = "data_web_races/soc_files"
+for fichier in os.listdir(dossier):
+    if fichier.endswith('.soc'):  # Assurez-vous que le fichier est un fichier CSV
+        chemin_fichier = os.path.join(dossier, fichier)
 
-'''
-STAT
-'''
+        # Appel de votre méthode avec le dataframe en tant qu'argument
+        csv_file, title = format_soc_to_csv(chemin_fichier)
+        print("chemin : " + csv_file)
 
-# Get size of dataset
-#print(data_vote)
-dim = size_of_dataset(data_vote)
-#print(dim)
-#print("Le dataset contient " + str(dim[1]) + " votants et " + str(dim[0]) + " candidats.")
+        data_vote = pd.read_csv(filepath_or_buffer=csv_file, delimiter=',', header=None)
 
-#uniq_ranks = is_classement_uniq(data_vote)
-#print(uniq_ranks)
+        # Ouvrir un fichier en mode écriture
+        with open(f'res_txt/{title}.txt', 'w') as f:
+            # Rediriger la sortie standard vers le fichier
+            sys.stdout = f
 
-frq_val = frequency_per_ranks_per_crit(data_vote)
+            '''
+            STAT
+            '''
 
-#plot_frequency(frq_val)
+            # Get size of dataset
+            # print(data_vote)
+            dim = size_of_dataset(data_vote)
+            # print(dim)
+            # print("Le dataset contient " + str(dim[1]) + " votants et " + str(dim[0]) + " candidats.")
 
-'''
-Fin STAT
-'''
+            # uniq_ranks = is_classement_uniq(data_vote)
+            # print(uniq_ranks)
 
-'''
-Vote à 1 tour
-'''
-print("---------- Vote 1 Tour ----------")
-voteUnTour(data_vote)
-'''
-Fin Vote à 1 tour
-'''
+            frq_val = frequency_per_ranks_per_crit(data_vote)
 
-'''
-Vote à 2 tours
-'''
-print("---------- Vote 2 Tours ----------")
-voteDeuxTours(data_vote)
-'''
-Fin Vote à 2 tours
-'''
+            # plot_frequency(frq_val)
 
-'''
-Borda
-'''
-print("---------- Vote Borda ----------")
-classementBorda(methodeBorda(frq_val))
-print(vainqueurBorda(methodeBorda(frq_val)))
-plot_borda(frq_val)
-'''
-Fin Borda
-'''
+            '''
+            Fin STAT
+            '''
 
+            '''
+            Vote à 1 tour
+            '''
+            print("---------- Vote 1 Tour ----------")
+            voteUnTour(data_vote, title)
+            '''
+            Fin Vote à 1 tour
+            '''
 
-'''
-Alternatif
-'''
-print("---------- Vote alternatif ----------")
-print(vote_alternatif(data_vote, dim[1]))
-print(vote_alternatif_classement(data_vote))
-'''
-Fin Alternatif
-'''
+            '''
+            Vote à 2 tours
+            '''
+            print("---------- Vote 2 Tours ----------")
+            voteDeuxTours(data_vote, title)
+            '''
+            Fin Vote à 2 tours
+            '''
 
+            '''
+            Borda
+            '''
+            print("---------- Vote Borda ----------")
+            classementBorda(methodeBorda(frq_val))
+            print(vainqueurBorda(methodeBorda(frq_val)))
+            plot_borda(frq_val, title)
+            '''
+            Fin Borda
+            '''
 
-# -------------------
-# Coombs
-# -------------------
-print("---------- Vote Coombs ----------")
-print(vote_alternatif_coombs(data_vote, dim[1]))
-print(vote_alternatif_classement_coombs(data_vote))
+            '''
+            Alternatif
+            '''
+            print("---------- Vote alternatif ----------")
+            print(vote_alternatif(data_vote, dim[1]))
+            print(vote_alternatif_classement(data_vote, title))
+            '''
+            Fin Alternatif
+            '''
 
-# -------------------
-# Condorcet
-# -------------------
-print("---------- Vote Condorcet ----------")
-condorcet(data_vote)
+            # -------------------
+            # Coombs
+            # -------------------
+            print("---------- Vote Coombs ----------")
+            print(vote_alternatif_coombs(data_vote, dim[1]))
+            print(vote_alternatif_classement_coombs(data_vote, title))
 
+            # -------------------
+            # Condorcet
+            # -------------------
+            print("---------- Vote Condorcet ----------")
+            condorcet(data_vote, title)
 
-# -------------------
-# Kemeny-Young
-# -------------------
-#print("---------- Vote Kemeny-Young ----------")
-#print(kemeny_young(data_vote))
+            # -------------------
+            # Kemeny-Young
+            # -------------------
+            # print("---------- Vote Kemeny-Young ----------")
+            # print(kemeny_young(data_vote))
 
-# -------------------
-# Copeland
-# -------------------
-print("---------- Vote Copeland ----------")
-copeland(data_vote)
+            # -------------------
+            # Copeland
+            # -------------------
+            print("---------- Vote Copeland ----------")
+            copeland(data_vote, title)
 
-
+            # Restaurer la sortie standard
+            sys.stdout = sys.__stdout__

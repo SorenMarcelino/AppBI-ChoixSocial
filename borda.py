@@ -58,7 +58,7 @@ def init_dict(data):
     return result
 
 
-def plot_borda(data):
+def plot_borda(data, title):
     # Barplot
     plt.figure(figsize=(10, 6))
     for candidat, scores in data.items():
@@ -69,4 +69,4 @@ def plot_borda(data):
     plt.legend()
     plt.xticks(np.arange(1, len(scores) + 1))
     plt.grid(True)
-    plt.savefig('fig_borda/borda.png')
+    plt.savefig(f'fig_borda/borda_{title}.png')

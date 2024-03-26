@@ -2,11 +2,11 @@ import re
 import pandas as pd
 
 
-def format_soc_to_csv():
+def format_soc_to_csv(chemin_soc_file):
     title = None
     alternative_names = []
     lines = []
-    with open("data_web/00052-00000070.soc", "r") as file:
+    with open(chemin_soc_file, "r") as file:
         # Parcourir chaque ligne du fichier
         for line in file:
             # Utiliser une expression régulière pour trouver les lignes commençant par "TITLE"
@@ -21,20 +21,42 @@ def format_soc_to_csv():
                 if alternative_name:
                     alternative_names.append(alternative_name.group(2))
             lines.append(line)
+        if "data_web_season" in chemin_soc_file:
+            print("oui")
+            with open('data_web_season/' + title + '.csv', 'w') as f_out:
+                # Parcourir chaque ligne du fichier d'entrée
+                for line in lines:
+                    # Vérifier si la ligne ne commence pas par "#"
+                    if not line.startswith('#'):
+                        # Écrire la ligne dans le fichier de sortie
+                        line = line.split(":", 1)[-1]
+                        f_out.write(line)
 
-    with open('data_web/' + title + '.csv', 'w') as f_out:
-        # Parcourir chaque ligne du fichier d'entrée
-        for line in lines:
-            # Vérifier si la ligne ne commence pas par "#"
-            if not line.startswith('#'):
-                # Écrire la ligne dans le fichier de sortie
-                line = line.split(":", 1)[-1]
-                f_out.write(line)
+            df = pd.read_csv("data_web_season/" + title + ".csv", header=None)
+            df_transposed = df.transpose()
+            df_transposed.to_csv("data_web_season/" + title + ".csv", index=False, header=False)
 
-    df = pd.read_csv("data_web/" + title + ".csv", header=None)
-    df_transposed = df.transpose()
-    df_transposed.to_csv("data_web/" + title + ".csv", index=False, header=False)
+            # Afficher la liste des noms d'alternatives
+            print(title)
+            print(alternative_names)
+            return f"data_web_season/{title}.csv", title
 
-    # Afficher la liste des noms d'alternatives
-    print(title)
-    print(alternative_names)
+        elif "data_web_races/soc_files/" in chemin_soc_file:
+            print("non")
+            with open('data_web_races/csv_files/' + title + '.csv', 'w') as f_out:
+                # Parcourir chaque ligne du fichier d'entrée
+                for line in lines:
+                    # Vérifier si la ligne ne commence pas par "#"
+                    if not line.startswith('#'):
+                        # Écrire la ligne dans le fichier de sortie
+                        line = line.split(":", 1)[-1]
+                        f_out.write(line)
+
+            df = pd.read_csv("data_web_races/csv_files/" + title + ".csv", header=None)
+            df_transposed = df.transpose()
+            df_transposed.to_csv("data_web_races/csv_files/" + title + ".csv", index=False, header=False)
+
+            # Afficher la liste des noms d'alternatives
+            print(title)
+            print(alternative_names)
+            return f"data_web_races/csv_files/{title}.csv", title

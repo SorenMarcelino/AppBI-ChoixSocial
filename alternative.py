@@ -86,7 +86,7 @@ def vote_alternatif(data_frame, cols):
         loosers.append(loosing_key)
 
 
-def vote_alternatif_classement(data_frame):
+def vote_alternatif_classement(data_frame, title):
     clone = data_frame.copy()
     participants = {}
     loosers = []
@@ -113,7 +113,7 @@ def vote_alternatif_classement(data_frame):
         loosers.append(loosing_key)
         labelTour += 1
 
-    alternative_plot(tours)
+    alternative_plot(tours, title)
 
     loosers.reverse()
     return loosers
@@ -125,7 +125,7 @@ def find_non_loser(y, loosers):
     return None
 
 
-def alternative_plot(data):
+def alternative_plot(data, title):
     participants = set(participant for tour in data.values() for participant in tour.keys())
     tours = sorted(data.keys())
     pourcentages = {participant: [] for participant in participants}
@@ -171,7 +171,8 @@ def alternative_plot(data):
     plt.xlabel('Tour')
     plt.ylabel('Pourcentage du nombre de voix')
     plt.title('Pourcentage du nombre de voix de chaque participant à chaque tour')
+    plt.suptitle(title)
     plt.xticks(x, tours)
     plt.legend()
     plt.grid(True)
-    plt.savefig('fig_alternative/alternative.png')
+    plt.savefig(f'fig_alternative/alternative_{title}.png')

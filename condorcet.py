@@ -5,7 +5,7 @@ import pandas as pd
 from pyparsing import results
 
 
-def condorcet(csv):
+def condorcet(csv, title):
     nombre_de_colonnes = len(csv.columns)
     nombre_de_lignes = len(csv.index)
     votants = []
@@ -70,7 +70,7 @@ def condorcet(csv):
     plt.xlabel("Candidats")
     plt.ylabel("Candidats")
     plt.tight_layout()  # Ajustement automatique de l'espacement
-    plt.savefig('fig_condorcet/matriceCondorcet.png', dpi=300)  # Augmentation de la résolution
+    plt.savefig(f'fig_condorcet/matrice_condorcet/matriceCondorcet_{title}.png', dpi=300)  # Augmentation de la résolution
 
     """
         Analyses the dictionary of scores and
@@ -103,7 +103,7 @@ def condorcet(csv):
     elif len(winners) > 1:
         print("Il y a une égalité entre les candidats suivants pour le gagnant de Condorcet :", winners)
     else:
-        print("Aucun gagant de Condorcet trouvé.")
+        print("Aucun gagnant de Condorcet trouvé.")
 
     # Affichage du plot bar des résultats de Condorcet pour tous les candidats
     plt.figure(figsize=(10, 6))
@@ -112,4 +112,4 @@ def condorcet(csv):
     plt.xlabel('Candidats')
     plt.ylabel('Nombre de victoires de Condorcet')
     plt.title('Résultats de Condorcet pour tous les candidats')
-    plt.savefig('fig_condorcet/resultsCondorcet.png')
+    plt.savefig(f'fig_condorcet/results_condorcet/resultsCondorcet_{title}.png')

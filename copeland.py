@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-def copeland(csv):
+def copeland(csv, title):
     nombre_de_colonnes = len(csv.columns)
     nombre_de_lignes = len(csv.index)
     votants = []
@@ -128,13 +128,13 @@ def copeland(csv):
     sorted_candidates = sorted(candidates)
 
     # Affichage du plot bar des résultats de Condorcet pour tous les candidats
-    plt.figure(figsize=(10, 6))
-    plt.bar(range(len(sorted_candidates)), [list(results.values()).count(c) for c in sorted_candidates], align='center')
-    plt.xticks(range(len(sorted_candidates)), sorted_candidates)
-    plt.xlabel('Candidats')
-    plt.ylabel('Nombre de victoires de Condorcet')
-    plt.title('Résultats de Condorcet pour tous les candidats')
-    plt.savefig('fig_condorcet/resultsCondorcet.png')
+    #plt.figure(figsize=(10, 6))
+    #plt.bar(range(len(sorted_candidates)), [list(results.values()).count(c) for c in sorted_candidates], align='center')
+    #plt.xticks(range(len(sorted_candidates)), sorted_candidates)
+    #plt.xlabel('Candidats')
+    #plt.ylabel('Nombre de victoires de Condorcet')
+    #plt.title('Résultats de Condorcet pour tous les candidats')
+    #plt.savefig('fig_condorcet/resultsCondorcet.png')
 
     # Affichage du plot bar de la différence (nombre de duels gagnés - nombre de duels perdus) pour chaque candidat
     plt.figure(figsize=(10, 6))
@@ -145,4 +145,4 @@ def copeland(csv):
     plt.title('Différence entre les duels gagnés et les duels perdus pour chaque candidat')
     plt.axhline(0, color='gray', linestyle='-', linewidth=0.8)  # Ajout de la ligne à l'abscisse 0
     plt.tight_layout()  # Ajustement de la disposition
-    plt.savefig('fig_copeland/resultatsCopeland.png')
+    plt.savefig(f'fig_copeland/resultatsCopeland_{title}.png')

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def voteDeuxTours(csv):
+def voteDeuxTours(csv, title):
     # Deux gagnants du premier tour
     premiere_ligne = csv.iloc[0]
     occurrences = premiere_ligne.value_counts()
@@ -60,5 +60,5 @@ def voteDeuxTours(csv):
     plt.xlabel('Candidats')
     plt.ylabel('Nombre de votes')
     plt.title('Résultats du second tour')
-    plt.savefig('fig_voteDeuxTours/voteDeuxTours.png')
+    plt.savefig(f'fig_voteDeuxTours/voteDeuxTours_{title}.png')
     plt.close()
