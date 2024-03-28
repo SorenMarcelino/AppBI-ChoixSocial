@@ -2,10 +2,11 @@ import re
 import pandas as pd
 
 
-def format_soc_to_csv(chemin_soc_file):
+def format_soc_to_csv(chemin_soc_file, driver_list_reference_dict, driver_list_course_dict):
     title = None
     alternative_names = []
     lines = []
+    cpt_alternative_name_line = 1
     with open(chemin_soc_file, "r") as file:
         # Parcourir chaque ligne du fichier
         for line in file:
@@ -19,10 +20,23 @@ def format_soc_to_csv(chemin_soc_file):
                 alternative_name = re.match(r'# ALTERNATIVE NAME (\d+): (.+)', line)
                 # Ajouter le nom de l'alternative à la liste
                 if alternative_name:
-                    alternative_names.append(alternative_name.group(2))
+                    #alternative_names.append(alternative_name.group(2))
+                    if "data_web_season" in chemin_soc_file:
+                        # Ajout de la ligne au dictionnaire référence des pilotes
+                        # parts = line.split(":")
+                        # num = int(parts[0].split()[-1])
+                        # name = parts[1].strip()
+                        driver_list_reference_dict[cpt_alternative_name_line] = alternative_name.group(2)
+                    if "data_web_races/soc_files/" in chemin_soc_file:
+                        # Ajout de la ligne au dictionnaire référence des pilotes
+                        # parts = line.split(":")
+                        # num = int(parts[0].split()[-1])
+                        # name = parts[1].strip()
+                        driver_list_course_dict[cpt_alternative_name_line] = alternative_name.group(2)
+                    cpt_alternative_name_line += 1
+
             lines.append(line)
         if "data_web_season" in chemin_soc_file:
-            print("oui")
             with open('data_web_season/' + title + '.csv', 'w') as f_out:
                 # Parcourir chaque ligne du fichier d'entrée
                 for line in lines:
@@ -39,10 +53,9 @@ def format_soc_to_csv(chemin_soc_file):
             # Afficher la liste des noms d'alternatives
             print(title)
             print(alternative_names)
-            return f"data_web_season/{title}.csv", title
+            return f"data_web_season/{title}.csv", title, driver_list_reference_dict, driver_list_course_dict
 
         elif "data_web_races/soc_files/" in chemin_soc_file:
-            print("non")
             with open('data_web_races/csv_files/' + title + '.csv', 'w') as f_out:
                 # Parcourir chaque ligne du fichier d'entrée
                 for line in lines:
@@ -59,4 +72,4 @@ def format_soc_to_csv(chemin_soc_file):
             # Afficher la liste des noms d'alternatives
             print(title)
             print(alternative_names)
-            return f"data_web_races/csv_files/{title}.csv", title
+            return f"data_web_races/csv_files/{title}.csv", title, driver_list_reference_dict, driver_list_course_dict
