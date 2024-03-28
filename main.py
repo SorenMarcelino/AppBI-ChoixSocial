@@ -88,7 +88,7 @@ Fin Alternatif
 # -------------------
 # Kemeny-Young
 # -------------------
-#print(kemeny_young(data_vote))
+(top_kemenyYoung, rank_kemenyYoung) = kemenyYoung(data_vote)
 
 # -------------------
 # Copeland
