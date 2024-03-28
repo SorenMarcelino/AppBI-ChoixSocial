@@ -177,8 +177,6 @@ for dossier in dossiers:
     
 for classement_file in os.listdir(chemin_classements):
     print("Formattage de :", classement_file)
-    '''
     df = pd.read_csv("classements_des_saisons_en_fonction_des_methodes_sur_les_courses/" + classement_file, header=None)
     df_transposed = df.transpose()
     df_transposed.to_csv("classements_des_saisons_en_fonction_des_methodes_sur_les_courses/" + classement_file, index=False, header=False)
-    '''
