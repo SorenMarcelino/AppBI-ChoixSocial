@@ -10,7 +10,7 @@ from copeland import *
 import pandas as pd
 from Statistiques import *
 
-data_vote = pd.read_csv(filepath_or_buffer='data/exo1.csv', delimiter=',', header=None)
+data_vote = pd.read_csv(filepath_or_buffer='data/profil2.csv', delimiter=',', header=None)
 #data_vote = pd.read_csv(filepath_or_buffer='data_web/2019.csv', delimiter=',', header=None)
 
 format_soc_to_csv()
@@ -23,7 +23,7 @@ STAT
 #print(data_vote)
 dim = size_of_dataset(data_vote)
 #print(dim)
-#print("Le dataset contient " + str(dim[1]) + " classement(s) de " + str(dim[0]) + " critères")
+#print("Le dataset contient " + str(dim[1]) + " votants et " + str(dim[0]) + " candidats.")
 
 #uniq_ranks = is_classement_uniq(data_vote)
 #print(uniq_ranks)
@@ -39,7 +39,8 @@ Fin STAT
 '''
 Vote à 1 tour
 '''
-#voteUnTour(data_vote)
+print("---------- Vote 1 Tour ----------")
+voteUnTour(data_vote)
 '''
 Fin Vote à 1 tour
 '''
@@ -47,6 +48,7 @@ Fin Vote à 1 tour
 '''
 Vote à 2 tours
 '''
+print("---------- Vote 2 Tours ----------")
 voteDeuxTours(data_vote)
 '''
 Fin Vote à 2 tours
@@ -55,9 +57,10 @@ Fin Vote à 2 tours
 '''
 Borda
 '''
-#classementBorda(methodeBorda(frq_val))
-#print(vainqueurBorda(methodeBorda(frq_val)))
-#plot_borda(frq_val)
+print("---------- Vote Borda ----------")
+classementBorda(methodeBorda(frq_val))
+print(vainqueurBorda(methodeBorda(frq_val)))
+plot_borda(frq_val)
 '''
 Fin Borda
 '''
@@ -66,8 +69,9 @@ Fin Borda
 '''
 Alternatif
 '''
-#print(vote_alternatif(data_vote, dim[1]))
-#print(vote_alternatif_classement(data_vote))
+print("---------- Vote alternatif ----------")
+print(vote_alternatif(data_vote, dim[1]))
+print(vote_alternatif_classement(data_vote))
 '''
 Fin Alternatif
 '''
@@ -76,23 +80,27 @@ Fin Alternatif
 # -------------------
 # Coombs
 # -------------------
-#print(vote_alternatif_coombs(data_vote, dim[1]))
-#print(vote_alternatif_classement_coombs(data_vote))
+print("---------- Vote Coombs ----------")
+print(vote_alternatif_coombs(data_vote, dim[1]))
+print(vote_alternatif_classement_coombs(data_vote))
 
 # -------------------
 # Condorcet
 # -------------------
-#condorcet(data_vote)
+print("---------- Vote Condorcet ----------")
+condorcet(data_vote)
 
 
 # -------------------
 # Kemeny-Young
 # -------------------
-(top_kemenyYoung, rank_kemenyYoung) = kemenyYoung(data_vote)
+#print("---------- Vote Kemeny-Young ----------")
+#(top_kemenyYoung, rank_kemenyYoung) = kemenyYoung(data_vote)
 
 # -------------------
 # Copeland
 # -------------------
-#copeland(data_vote)
+print("---------- Vote Copeland ----------")
+copeland(data_vote)
 
 

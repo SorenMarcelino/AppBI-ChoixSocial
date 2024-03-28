@@ -144,7 +144,7 @@ def coombs_plot(data, dataWinner):
 
     plt.xlabel('Tour')
     plt.ylabel('Pourcentage du nombre de voix')
-    plt.title('Pourcentage du nombre de voix donnant le participant en dernière place le participant à chaque tour')
+    plt.title('Pourcentage du nombre de voix donnant le participant en dernière place à chaque tour')
     plt.xticks(x, tours)
     plt.legend()
     plt.grid(True)
@@ -165,7 +165,7 @@ def coombs_plot(data, dataWinner):
 
     plt.xlabel('Tour')
     plt.ylabel('Pourcentage du nombre de voix')
-    plt.title('Pourcentage du nombre de voix donnant le participant en première place le participant à chaque tour')
+    plt.title('Pourcentage du nombre de voix donnant le participant en première place à chaque tour')
     plt.xticks(x, tours)
     plt.legend()
     plt.grid(True)

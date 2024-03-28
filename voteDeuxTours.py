@@ -44,17 +44,21 @@ def voteDeuxTours(csv):
     if occurrences[deux_plus_frequents.index[0]] > occurrences[deux_plus_frequents.index[1]]:
         print(f"Le gagnant du second tour est :\n"
               f" {deux_plus_frequents.index[0]} avec {occurrences[deux_plus_frequents.index[0]]} votes")
+        print(f"Le deuxième du second tour est :\n"
+              f" {deux_plus_frequents.index[1]} avec {occurrences[deux_plus_frequents.index[1]]} votes")
     else:
         print(f"Le gagnant du second tour est :\n"
               f" {deux_plus_frequents.index[1]} avec {occurrences[deux_plus_frequents.index[1]]} votes")
+        print(f"Le deuxième du second tour est :\n"
+              f" {deux_plus_frequents.index[0]} avec {occurrences[deux_plus_frequents.index[0]]} votes")
 
-    candidats = list(deux_plus_frequents.index)
-    sorted_candidates = sorted(candidats)  # Trier les candidats par ordre alphabétique
-    votes = [occurrences[candidat] for candidat in sorted_candidates]
+    candidats_finaux = list(deux_plus_frequents.index)
+    votes = [occurrences[candidat] for candidat in candidats_finaux]
 
     # Création du barplot
-    plt.bar(sorted_candidates, votes, color=['blue', 'green'])  # Couleur différente pour chaque barre
+    plt.bar(candidats_finaux, votes, color=['blue', 'green'])  # Couleur différente pour chaque barre
     plt.xlabel('Candidats')
     plt.ylabel('Nombre de votes')
     plt.title('Résultats du second tour')
-    plt.savefig('fig_voteDeuxTours/voteDeuxTours')
+    plt.savefig('fig_voteDeuxTours/voteDeuxTours.png')
+    plt.close()

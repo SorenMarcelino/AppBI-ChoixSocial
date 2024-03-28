@@ -13,12 +13,14 @@ def kemenyYoung(data):
                 key = candidate1 + candidate2
                 pair_matrix[key] = 0
 
+
     for col in data:
         for i in range(0, len(data[col]) - 1):
             for j in range(i + 1, len(data[col])):
                 if i != j:
                     key = data[col][i] + data[col][j]
                     pair_matrix[key] += 1
+
 
     print(pair_matrix)
     ranks = list(itertools.permutations(data[0]))

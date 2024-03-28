@@ -20,4 +20,5 @@ def voteUnTour(csv):
 
     # Afficher le diagramme
     plt.savefig('fig_voteUnTour/voteUnTour.png')
+    plt.close()
 
