@@ -1,4 +1,5 @@
 import os
+import shutil
 import sys
 
 from format_soc_to_csv import *
@@ -13,11 +14,30 @@ from copeland import *
 import pandas as pd
 from Statistiques import *
 
-#data_vote = pd.read_csv(filepath_or_buffer='data_web_season/2019.csv', delimiter=',', header=None)
-#data_vote = pd.read_csv(filepath_or_buffer='data_web_season/2019.csv', delimiter=',', header=None)
+# data_vote = pd.read_csv(filepath_or_buffer='data_web_season/2019.csv', delimiter=',', header=None)
+# data_vote = pd.read_csv(filepath_or_buffer='data_web_season/2019.csv', delimiter=',', header=None)
 
 data_vote = None
 dossier = "data_web_races/soc_files"
+
+chemins_dossiers = ['data_web_races/csv_files/', 'fig_alternative/', 'fig_borda', 'fig_condorcet/matrice_condorcet',
+                    'fig_condorcet/results_condorcet', 'fig_coombs', 'fig_copeland', 'fig_voteDeuxTours',
+                    'fig_voteUnTour', 'res_txt', 'classements_des_saisons_en_fonction_des_methodes_sur_les_courses']
+
+# Parcourir chaque chemin de dossier et supprimer son contenu
+for chemin in chemins_dossiers:
+    # Parcourir les fichiers et dossiers dans le dossier
+    for element in os.listdir(chemin):
+        element_path = os.path.join(chemin, element)
+        print(f"Nettoyage de {element_path}...")
+        # Vérifier si l'élément est un dossier
+        if os.path.isdir(element_path):
+            # Récursivement supprimer le contenu du dossier
+            shutil.rmtree(element_path)
+        else:
+            # Supprimer le fichier
+            os.remove(element_path)
+
 for fichier in os.listdir(dossier):
     if fichier.endswith('.soc'):  # Assurez-vous que le fichier est un fichier CSV
         chemin_fichier = os.path.join(dossier, fichier)
@@ -76,7 +96,8 @@ for fichier in os.listdir(dossier):
             Borda
             '''
             print("---------- Vote Borda ----------")
-            classementBorda(methodeBorda(frq_val))
+            classementBorda(methodeBorda(frq_val), title)
+            sys.stdout = f
             print(vainqueurBorda(methodeBorda(frq_val)))
             plot_borda(frq_val, title)
             '''
@@ -88,7 +109,16 @@ for fichier in os.listdir(dossier):
             '''
             print("---------- Vote alternatif ----------")
             print(vote_alternatif(data_vote, dim[1]))
-            print(vote_alternatif_classement(data_vote, title))
+            classement_vote_alternatif = vote_alternatif_classement(data_vote, title)
+            print(classement_vote_alternatif)
+            with open(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/classementAlternatif_SOCs_2019.csv',
+                      'a') as alt:
+                sys.stdout = alt
+                filtered_data = re.sub(r'[^\d,\n]+', '', str(classement_vote_alternatif))
+                alt.write(filtered_data)
+                alt.write("\n")
+            sys.stdout = f
+
             '''
             Fin Alternatif
             '''
@@ -98,7 +128,15 @@ for fichier in os.listdir(dossier):
             # -------------------
             print("---------- Vote Coombs ----------")
             print(vote_alternatif_coombs(data_vote, dim[1]))
-            print(vote_alternatif_classement_coombs(data_vote, title))
+            classement_vote_coombs = vote_alternatif_classement_coombs(data_vote, title)
+            print(classement_vote_coombs)
+            with open(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/classementCoombs_SOCs_2019.csv',
+                      'a') as coo:
+                sys.stdout = coo
+                filtered_data = re.sub(r'[^\d,\n]+', '', str(classement_vote_coombs))
+                coo.write(filtered_data)
+                coo.write("\n")
+            sys.stdout = f
 
             # -------------------
             # Condorcet

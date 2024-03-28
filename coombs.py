@@ -149,6 +149,7 @@ def coombs_plot(data, dataWinner, title):
     plt.legend()
     plt.grid(True)
     plt.savefig(f'fig_coombs/coombsDernier_{title}.png')
+    plt.close()
 
     # Création de l'histogramme empilé
     plt.figure(figsize=(10, 6))
@@ -170,3 +171,4 @@ def coombs_plot(data, dataWinner, title):
     plt.legend()
     plt.grid(True)
     plt.savefig(f'fig_coombs/coombsPremier_{title}.png')
+    plt.close()

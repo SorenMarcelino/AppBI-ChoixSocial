@@ -71,6 +71,7 @@ def condorcet(csv, title):
     plt.ylabel("Candidats")
     plt.tight_layout()  # Ajustement automatique de l'espacement
     plt.savefig(f'fig_condorcet/matrice_condorcet/matriceCondorcet_{title}.png', dpi=300)  # Augmentation de la résolution
+    plt.close()
 
     """
         Analyses the dictionary of scores and
@@ -113,3 +114,4 @@ def condorcet(csv, title):
     plt.ylabel('Nombre de victoires de Condorcet')
     plt.title('Résultats de Condorcet pour tous les candidats')
     plt.savefig(f'fig_condorcet/results_condorcet/resultsCondorcet_{title}.png')
+    plt.close()

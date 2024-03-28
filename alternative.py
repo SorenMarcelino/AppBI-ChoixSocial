@@ -176,3 +176,4 @@ def alternative_plot(data, title):
     plt.legend()
     plt.grid(True)
     plt.savefig(f'fig_alternative/alternative_{title}.png')
+    plt.close()

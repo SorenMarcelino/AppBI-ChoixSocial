@@ -69,6 +69,7 @@ def plot_frequency(data):
     plt.title("Fréquence de vote pour chaques candidats en fonction de leur position")
     plt.legend()
     plt.savefig("fig_statistiques/frequenceVoteEnFonctionPosition")
+    plt.close()
 
     fig, ax = plt.subplots()
     for x, y in data.items():

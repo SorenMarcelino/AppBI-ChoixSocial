@@ -62,6 +62,7 @@ def copeland(csv, title):
     plt.xlabel("Candidats")
     plt.ylabel("Candidats")
     plt.savefig('fig_condorcet/matriceCondorcet.png')
+    plt.close()
 
     """
         Analyses the dictionary of scores and
@@ -146,3 +147,4 @@ def copeland(csv, title):
     plt.axhline(0, color='gray', linestyle='-', linewidth=0.8)  # Ajout de la ligne à l'abscisse 0
     plt.tight_layout()  # Ajustement de la disposition
     plt.savefig(f'fig_copeland/resultatsCopeland_{title}.png')
+    plt.close()
