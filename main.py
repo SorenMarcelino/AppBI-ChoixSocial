@@ -94,8 +94,8 @@ condorcet(data_vote)
 # -------------------
 # Kemeny-Young
 # -------------------
-#print("---------- Vote Kemeny-Young ----------")
-#(top_kemenyYoung, rank_kemenyYoung) = kemenyYoung(data_vote)
+print("---------- Vote Kemeny-Young ----------")
+(top_kemenyYoung, rank_kemenyYoung) = kemenyYoung(data_vote)
 
 # -------------------
 # Copeland
