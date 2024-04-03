@@ -1,8 +1,12 @@
+import csv
+import random
 import re
 import pandas as pd
 
+from difference_between_dicts import *
 
-def format_soc_to_csv(chemin_soc_file, driver_list_reference_dict, driver_list_course_dict):
+
+def format_soc_to_csv(chemin_soc_file, driver_list_reference_dict, driver_list_course_dict, driver_list_course_dnf_dict):
     title = None
     alternative_names = []
     lines = []
@@ -34,8 +38,12 @@ def format_soc_to_csv(chemin_soc_file, driver_list_reference_dict, driver_list_c
                         # name = parts[1].strip()
                         driver_list_course_dict[cpt_alternative_name_line] = alternative_name.group(2)
                     cpt_alternative_name_line += 1
-
             lines.append(line)
+        print(f"{title}_season : {driver_list_reference_dict}")
+        print(f"{title}_course : {driver_list_course_dict}")
+        driver_list_course_dnf_dict = difference_between_dicts(driver_list_reference_dict, driver_list_course_dict, driver_list_course_dnf_dict)
+        print(f"{title}_course_dnf : {driver_list_course_dnf_dict}")
+
         if "data_web_season" in chemin_soc_file:
             with open('data_web_season/' + title + '.csv', 'w') as f_out:
                 # Parcourir chaque ligne du fichier d'entrée
