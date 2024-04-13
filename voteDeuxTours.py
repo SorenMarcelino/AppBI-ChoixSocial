@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def voteDeuxTours(csv, title):
+def voteDeuxTours(csv, title, is_merge):
     # Deux gagnants du premier tour
     premiere_ligne = csv.iloc[0]
     occurrences = premiere_ligne.value_counts()
@@ -59,6 +59,9 @@ def voteDeuxTours(csv, title):
     plt.bar(candidats_finaux, votes, color=['blue', 'green'])  # Couleur différente pour chaque barre
     plt.xlabel('Candidats')
     plt.ylabel('Nombre de votes')
-    plt.title('Résultats du second tour')
-    plt.savefig(f'fig_voteDeuxTours/voteDeuxTours_{title}.png')
+    plt.title(f'Résultats du second tour : {title}')
+    if is_merge:
+        plt.savefig(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/voteDeuxTours_{title}.png')
+    else:
+        plt.savefig(f'fig_voteDeuxTours/voteDeuxTours_{title}.png')
     plt.close()

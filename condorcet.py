@@ -5,7 +5,7 @@ import pandas as pd
 from pyparsing import results
 
 
-def condorcet(csv, title):
+def condorcet(csv, title, is_merge):
     nombre_de_colonnes = len(csv.columns)
     nombre_de_lignes = len(csv.index)
     votants = []
@@ -66,11 +66,14 @@ def condorcet(csv, title):
         for j in range(len(df.columns)):
             # Arrondir les valeurs à deux chiffres après la virgule
             plt.text(j, i, '{:.2f}'.format(df.iloc[i, j]), ha='center', va='center', color='black')
-    plt.title("Matrice des scores de Condorcet")
+    plt.title(f"Matrice des scores de Condorcet : {title}")
     plt.xlabel("Candidats")
     plt.ylabel("Candidats")
     plt.tight_layout()  # Ajustement automatique de l'espacement
-    plt.savefig(f'fig_condorcet/matrice_condorcet/matriceCondorcet_{title}.png', dpi=300)  # Augmentation de la résolution
+    if is_merge:
+        plt.savefig(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/matriceCondorcet_{title}.png', dpi=300)  # Augmentation de la résolution
+    else:
+        plt.savefig(f'fig_condorcet/matrice_condorcet/matriceCondorcet_{title}.png', dpi=300)  # Augmentation de la résolution
     plt.close()
 
     """
@@ -113,5 +116,8 @@ def condorcet(csv, title):
     plt.xlabel('Candidats')
     plt.ylabel('Nombre de victoires de Condorcet')
     plt.title('Résultats de Condorcet pour tous les candidats')
-    plt.savefig(f'fig_condorcet/results_condorcet/resultsCondorcet_{title}.png')
+    if is_merge:
+        plt.savefig(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/resultsCondorcet_{title}.png')
+    else:
+        plt.savefig(f'fig_condorcet/results_condorcet/resultsCondorcet_{title}.png')
     plt.close()

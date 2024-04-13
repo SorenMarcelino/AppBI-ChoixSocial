@@ -86,7 +86,7 @@ def vote_alternatif(data_frame, cols):
         loosers.append(loosing_key)
 
 
-def vote_alternatif_classement(data_frame, title):
+def vote_alternatif_classement(data_frame, title, is_merge):
     clone = data_frame.copy()
     participants = {}
     loosers = []
@@ -113,7 +113,7 @@ def vote_alternatif_classement(data_frame, title):
         loosers.append(loosing_key)
         labelTour += 1
 
-    alternative_plot(tours, title)
+    alternative_plot(tours, title, is_merge)
 
     loosers.reverse()
     return loosers
@@ -125,7 +125,7 @@ def find_non_loser(y, loosers):
     return None
 
 
-def alternative_plot(data, title):
+def alternative_plot(data, title, is_merge):
     participants = set(participant for tour in data.values() for participant in tour.keys())
     tours = sorted(data.keys())
     pourcentages = {participant: [] for participant in participants}
@@ -171,9 +171,12 @@ def alternative_plot(data, title):
     plt.xlabel('Tour')
     plt.ylabel('Pourcentage du nombre de voix')
     plt.title('Pourcentage du nombre de voix de chaque participant à chaque tour')
-    plt.suptitle(title)
+    plt.suptitle(f"Méthode alternative : {title}")
     plt.xticks(x, tours)
     plt.legend()
     plt.grid(True)
-    plt.savefig(f'fig_alternative/alternative_{title}.png')
+    if is_merge:
+        plt.savefig(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/alternative_{title}.png')
+    else:
+        plt.savefig(f'fig_alternative/alternative_{title}.png')
     plt.close()

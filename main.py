@@ -18,6 +18,7 @@ from kemenyYoung import *
 from copeland import *
 import pandas as pd
 from Statistiques import *
+from analyse_merge_tours_results import *
 
 # data_vote = pd.read_csv(filepath_or_buffer='data_web_season/2019.csv', delimiter=',', header=None)
 # data_vote = pd.read_csv(filepath_or_buffer='data_web_season/2019.csv', delimiter=',', header=None)
@@ -140,7 +141,7 @@ for dossier in dossiers:
                 Vote à 1 tour
                 '''
                 print("---------- Vote 1 Tour ----------")
-                voteUnTour(data_vote, title)
+                voteUnTour(data_vote, title, False)
                 '''
                 Fin Vote à 1 tour
                 '''
@@ -149,7 +150,7 @@ for dossier in dossiers:
                 Vote à 2 tours
                 '''
                 print("---------- Vote 2 Tours ----------")
-                voteDeuxTours(data_vote, title)
+                voteDeuxTours(data_vote, title, False)
                 '''
                 Fin Vote à 2 tours
                 '''
@@ -158,10 +159,10 @@ for dossier in dossiers:
                 Borda
                 '''
                 print("---------- Vote Borda ----------")
-                classementBorda(methodeBorda(frq_val), title)
+                classementBorda(methodeBorda(frq_val), title, False)
                 sys.stdout = f
                 print(vainqueurBorda(methodeBorda(frq_val)))
-                plot_borda(frq_val, title)
+                plot_borda(frq_val, title, False)
                 '''
                 Fin Borda
                 '''
@@ -171,7 +172,7 @@ for dossier in dossiers:
                 '''
                 print("---------- Vote alternatif ----------")
                 print(vote_alternatif(data_vote, dim[1]))
-                classement_vote_alternatif = vote_alternatif_classement(data_vote, title)
+                classement_vote_alternatif = vote_alternatif_classement(data_vote, title, False)
                 print(classement_vote_alternatif)
                 with open(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/classementAlternatif_SOCs_2019.csv',
                           'a') as alt:
@@ -190,7 +191,7 @@ for dossier in dossiers:
                 # -------------------
                 print("---------- Vote Coombs ----------")
                 print(vote_alternatif_coombs(data_vote, dim[1]))
-                classement_vote_coombs = vote_alternatif_classement_coombs(data_vote, title)
+                classement_vote_coombs = vote_alternatif_classement_coombs(data_vote, title, False)
                 print(classement_vote_coombs)
                 with open(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/classementCoombs_SOCs_2019.csv',
                           'a') as coo:
@@ -204,7 +205,7 @@ for dossier in dossiers:
                 # Condorcet
                 # -------------------
                 print("---------- Vote Condorcet ----------")
-                condorcet(data_vote, title)
+                condorcet(data_vote, title, False)
     
                 # -------------------
                 # Kemeny-Young
@@ -216,7 +217,7 @@ for dossier in dossiers:
                 # Copeland
                 # -------------------
                 print("---------- Vote Copeland ----------")
-                copeland(data_vote, title)
+                copeland(data_vote, title, False)
     
                 # Restaurer la sortie standard
                 sys.stdout = sys.__stdout__
@@ -228,3 +229,5 @@ for classement_file in os.listdir(chemin_classements):
     df = pd.read_csv("classements_des_saisons_en_fonction_des_methodes_sur_les_courses/" + classement_file, header=None)
     df_transposed = df.transpose()
     df_transposed.to_csv("classements_des_saisons_en_fonction_des_methodes_sur_les_courses/" + classement_file, index=False, header=False)
+
+analyse_merge_tours_results()

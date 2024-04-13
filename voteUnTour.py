@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def voteUnTour(csv, title):
+def voteUnTour(csv, title, is_merge):
     premiere_ligne = csv.iloc[0]
     occurrences = premiere_ligne.value_counts()
     # print(occurrences)
@@ -16,9 +16,12 @@ def voteUnTour(csv, title):
     # Ajouter des étiquettes au diagramme
     plt.xlabel('Candidats')
     plt.ylabel('Voix')
-    plt.title('Nombre de voix pour chaque candidat')
+    plt.title(f'Nombre de voix pour chaque candidat : {title}')
 
     # Afficher le diagramme
-    plt.savefig(f'fig_voteUnTour/voteUnTour_{title}.png')
+    if is_merge:
+        plt.savefig(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/voteUnTour_{title}.png')
+    else:
+        plt.savefig(f'fig_voteUnTour/voteUnTour_{title}.png')
     plt.close()
 

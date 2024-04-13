@@ -41,7 +41,7 @@ def vote_alternatif_coombs(data_frame, cols):
         loosers.append(loosing_key)
 
 
-def vote_alternatif_classement_coombs(data_frame, title):
+def vote_alternatif_classement_coombs(data_frame, title, is_merge):
     clone = data_frame.copy()
     participants = {}
     participantsWinner = {}
@@ -80,7 +80,7 @@ def vote_alternatif_classement_coombs(data_frame, title):
         del participantsWinner[loosing_key]
         loosers.append(loosing_key)
 
-    coombs_plot(tours, toursWinner, title)
+    coombs_plot(tours, toursWinner, title, is_merge)
 
     loosers.reverse()
     return loosers
@@ -91,7 +91,7 @@ def find_non_loser(y, loosers):
             return item
     return None
 
-def coombs_plot(data, dataWinner, title):
+def coombs_plot(data, dataWinner, title, is_merge):
     participants = set(participant for tour in data.values() for participant in tour.keys())
     tours = sorted(data.keys())
     pourcentages = {participant: [] for participant in participants}
@@ -144,11 +144,14 @@ def coombs_plot(data, dataWinner, title):
 
     plt.xlabel('Tour')
     plt.ylabel('Pourcentage du nombre de voix')
-    plt.title('Pourcentage du nombre de voix donnant le participant en dernière place à chaque tour')
+    plt.title(f'Pourcentage du nombre de voix donnant le participant en dernière place à chaque tour : {title}')
     plt.xticks(x, tours)
     plt.legend()
     plt.grid(True)
-    plt.savefig(f'fig_coombs/coombsDernier_{title}.png')
+    if is_merge:
+        plt.savefig(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/coombsDernier_{title}.png')
+    else:
+        plt.savefig(f'fig_coombs/coombsDernier_{title}.png')
     plt.close()
 
     # Création de l'histogramme empilé
@@ -166,9 +169,12 @@ def coombs_plot(data, dataWinner, title):
 
     plt.xlabel('Tour')
     plt.ylabel('Pourcentage du nombre de voix')
-    plt.title('Pourcentage du nombre de voix donnant le participant en première place à chaque tour')
+    plt.title(f'Pourcentage du nombre de voix donnant le participant en première place à chaque tour : {title}')
     plt.xticks(x, tours)
     plt.legend()
     plt.grid(True)
-    plt.savefig(f'fig_coombs/coombsPremier_{title}.png')
+    if is_merge:
+        plt.savefig(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/coombsPremier_{title}.png')
+    else:
+        plt.savefig(f'fig_coombs/coombsPremier_{title}.png')
     plt.close()

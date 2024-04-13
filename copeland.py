@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-def copeland(csv, title):
+def copeland(csv, title, is_merge):
     nombre_de_colonnes = len(csv.columns)
     nombre_de_lignes = len(csv.index)
     votants = []
@@ -58,10 +58,13 @@ def copeland(csv, title):
     for i in range(len(df.index)):
         for j in range(len(df.columns)):
             plt.text(j, i, df.iloc[i, j], ha='center', va='center', color='black')
-    plt.title("Matrice des scores de Condorcet")
+    plt.title(f"Matrice des scores de Condorcet : {title}")
     plt.xlabel("Candidats")
     plt.ylabel("Candidats")
-    plt.savefig('fig_condorcet/matriceCondorcet.png')
+    if is_merge:
+        plt.savefig(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/matriceCondorcet_{title}.png')
+    else:
+        plt.savefig(f'fig_condorcet/matriceCondorcet_{title}.png')
     plt.close()
 
     """
@@ -143,8 +146,11 @@ def copeland(csv, title):
     plt.xticks(range(len(sorted_candidates)), sorted_candidates)
     plt.xlabel('Candidats')
     plt.ylabel('Différence (Nombre de duels gagnés - Nombre de duels perdus)')
-    plt.title('Différence entre les duels gagnés et les duels perdus pour chaque candidat')
+    plt.title(f'Différence entre les duels gagnés et les duels perdus pour chaque candidat ; {title}')
     plt.axhline(0, color='gray', linestyle='-', linewidth=0.8)  # Ajout de la ligne à l'abscisse 0
     plt.tight_layout()  # Ajustement de la disposition
-    plt.savefig(f'fig_copeland/resultatsCopeland_{title}.png')
+    if is_merge:
+        plt.savefig(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/resultatsCopeland_{title}.png')
+    else:
+        plt.savefig(f'fig_copeland/resultatsCopeland_{title}.png')
     plt.close()
