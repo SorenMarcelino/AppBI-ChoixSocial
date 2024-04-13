@@ -1,7 +1,7 @@
 import itertools
 import matplotlib.pyplot as plt
 
-def kemenyYoung(data):
+def kemenyYoung(data, title, is_merge):
 
     pair_matrix = {}
 
@@ -59,10 +59,13 @@ def kemenyYoung(data):
     plt.bar(keys, values)
     plt.xlabel('Rangs')
     plt.ylabel('Scores')
-    plt.title('Histograme des rangs en fonction de leurs socres')
+    plt.title(f'Histogramme des rangs en fonction de leurs scores : {title}')
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.savefig('fig_kemenyYoung/histoKemenyYoung.png')
+    if is_merge:
+        plt.savefig(f'classements_des_saisons_en_fonction_des_methodes_sur_les_courses/histoKemenyYoung_{title}.png')
+    else:
+        plt.savefig('fig_kemenyYoung/histoKemenyYoung.png')
 
     return (max(ranks_score, key=ranks_score.get), ranks_score)
 

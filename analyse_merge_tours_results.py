@@ -123,8 +123,8 @@ def analyse_merge_tours_results():
                     # -------------------
                     # Kemeny-Young
                     # -------------------
-                    # print("---------- Vote Kemeny-Young ----------")
-                    # print(kemenyYoung(data_vote))
+                    print("---------- Vote Kemeny-Young ----------")
+                    print(kemenyYoung(data_vote, fichier, True))
 
                     # -------------------
                     # Copeland

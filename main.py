@@ -210,8 +210,8 @@ for dossier in dossiers:
                 # -------------------
                 # Kemeny-Young
                 # -------------------
-                # print("---------- Vote Kemeny-Young ----------")
-                # print(kemenyYoung(data_vote))
+                print("---------- Vote Kemeny-Young ----------")
+                print(kemenyYoung(data_vote, fichier, False))
     
                 # -------------------
                 # Copeland
